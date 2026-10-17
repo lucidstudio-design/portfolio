@@ -37,7 +37,7 @@ body::before {
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
 
-.wrap { max-width: 720px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
 
 header.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(5,5,5,.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
@@ -71,10 +71,12 @@ p { margin: 0 0 14px; max-width: 58ch; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 30px; }
 
 /* about */
-.hero { display: grid; grid-template-columns: 1fr 190px; gap: 44px; align-items: center; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 80px; align-items: center; }
 .hero > div { min-width: 0; }
-.portrait { width: 190px; max-width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 16px; box-shadow: 0 0 0 1px rgba(143,211,255,.3), 0 0 40px rgba(143,211,255,.12); }
-@media (max-width: 620px) { .hero { grid-template-columns: 1fr; gap: 28px; } .portrait { width: 140px; order: -1; } }
+.hero h1 { font-size: clamp(40px, 5.2vw, 68px); max-width: 15ch; }
+.portrait { width: 100%; max-width: 380px; aspect-ratio: 3/4; object-fit: cover; border-radius: 18px; box-shadow: 0 0 0 1px rgba(143,211,255,.3), 0 0 40px rgba(143,211,255,.12), 0 0 90px rgba(58,168,240,.08); }
+@media (max-width: 960px) { .hero { grid-template-columns: minmax(0, 1fr) 280px; gap: 48px; } }
+@media (max-width: 720px) { .hero { grid-template-columns: 1fr; gap: 28px; } .portrait { width: 180px; order: -1; } }
 
 .skills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
 .skills div { background: var(--surface); padding: 18px 20px; min-width: 0; }
@@ -91,7 +93,9 @@ p { margin: 0 0 14px; max-width: 58ch; }
 
 .quote { border-left: 2px solid var(--blue); padding-left: 18px; font-size: 17px; color: #dfe6eb; max-width: 60ch; margin: 0; }
 .quote p:last-child { margin-bottom: 0; }
-.hero .lede { font-size: 16.5px; line-height: 1.65; }
+.hero .lede { font-size: 16.5px; line-height: 1.65; max-width: 62ch; }
+.skills { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 720px) { .skills { grid-template-columns: repeat(2, 1fr); } }
 .quote cite { display: block; font: 400 12px/1.5 var(--mono); color: var(--muted); font-style: normal; margin-top: 10px; }
 
 /* parity dropdown */
