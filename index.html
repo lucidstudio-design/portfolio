@@ -129,6 +129,33 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--muted); margin-top: 10
 .chart svg { display: block; width: 100%; height: auto; }
 .chart text { font-family: var(--mono); }
 
+.teamhead { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 28px; align-items: center; }
+.teamhead h1 { margin-bottom: 14px; }
+.logo { width: 120px; height: 120px; object-fit: contain; background: #fff; border-radius: 20px; padding: 10px; box-shadow: 0 0 40px rgba(143,211,255,.15); }
+.meta { margin: 0; display: grid; gap: 8px; }
+.meta div { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; }
+.meta dt { font: 400 12px/1.6 var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--blue); }
+.meta dd { margin: 0; font-size: 15px; color: #c9d0d6; }
+@media (max-width: 560px) { .teamhead { grid-template-columns: 1fr; } .logo { width: 88px; height: 88px; } .meta div { grid-template-columns: 1fr; gap: 0; } }
+.learn { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.learn div { background: var(--surface); padding: 20px; min-width: 0; }
+.learn b { display: block; font-weight: 600; margin-bottom: 6px; color: var(--fg); }
+.learn p { margin: 0; color: var(--muted); font-size: 14.5px; }
+@media (max-width: 860px) { .learn { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .learn { grid-template-columns: 1fr; } }
+.feat { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
+.feat li { position: relative; padding-left: 22px; color: #c9d0d6; font-size: 15px; min-width: 0; }
+.feat li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--blue); box-shadow: 0 0 10px rgba(143,211,255,.5); }
+@media (max-width: 620px) { .feat { grid-template-columns: 1fr; } }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.tbl table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14.5px; }
+.tbl th, .tbl td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: 0; }
+.tbl th { font: 400 11px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.tbl td:nth-child(2) { font-weight: 600; white-space: nowrap; }
+.tbl td:nth-child(4) { color: var(--muted); }
+.tbl td.num { font-family: var(--mono); font-size: 13px; color: var(--blue); white-space: nowrap; }
+b { font-weight: 600; }
 .note { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 16px 18px; color: #c9d0d6; font-size: 15px; }
 .note b { color: var(--blue); font-weight: 500; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 6px; }
 
@@ -237,24 +264,78 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 
   <!-- DESIGN ANALYSIS -->
   <div class="stage" id="s-analysis">
-    <p class="eyebrow">Stage 02</p>
-    <h1>Design Analysis</h1>
-    <p class="lede">Some campers can aim but can't hold the marker or pull the trigger. Existing adaptive systems cost up to $3,000.</p>
-    <div class="grid2" style="margin-top:32px">
-      <figure><img src="img/marker.jpg" alt="Tippmann 98 Custom paintball marker"><figcaption>The camp's Tippmann 98</figcaption></figure>
-      <figure><img src="img/stakeholders.jpg" alt="Stakeholder map: campers, operators, parents"><figcaption>Stakeholder map</figcaption></figure>
+    <p class="eyebrow">Stage 02 · Design Analysis</p>
+
+    <div class="teamhead">
+      <img class="logo" src="img/logo.png" alt="Parity Aim logo: a cyan compass star with the words Parity AiM">
+      <div>
+        <h1>Parity Aim</h1>
+        <dl class="meta">
+          <div><dt>Team</dt><dd>Jason Fu, Team Lead · Reid Waldon, Note Taker &amp; Organizer · Lukah Villarreal, Researcher</dd></div>
+          <div><dt>Client</dt><dd>Malia White, Program Supervisor, Camp For All</dd></div>
+          <div><dt>Course</dt><dd>EDES 120/220 · Rice University · OEDK</dd></div>
+        </dl>
+      </div>
     </div>
-    <h2>Design criteria</h2>
-    <ul class="rows">
-      <li><span>Safe</span><span class="r">NXL guidelines</span></li>
-      <li><span>Stable</span><span class="r">≥ 100 N</span></li>
-      <li><span>Sturdy trigger</span><span class="r">≥ 10 N</span></li>
-      <li><span>Easy to use · #1 objective</span><span class="r hi">Level 4 / 5 independence</span></li>
-      <li><span>Enduring</span><span class="r">≥ 10,400 uses</span></li>
-      <li><span>Economical</span><span class="r">≤ $40</span></li>
-      <li><span>Easy to maintain</span><span class="r">&lt; 20 s to detach</span></li>
+    <figure style="margin-top:28px">
+      <img src="img/team.jpg" alt="Jason Fu, Lukah Villarreal and Reid Waldon outside the OEDK at Rice">
+      <figcaption>Team photo. Left to right: Jason, Lukah, Reid.</figcaption>
+    </figure>
+
+    <h2>Mission statement</h2>
+    <p class="quote">Our goal is to improve access to paintball target shooting for Camp For All campers with limited hand or arm function, allowing them to participate more independently in the activity.</p>
+
+    <h2>The problem</h2>
+    <p>At the paintball range, some campers with limited hand strength, dexterity, finger movement, or arm mobility can aim and know when they want to fire, but cannot stabilize the marker or generate the force needed to pull a traditional trigger. There is no dedicated accommodation: the range only has a table to rest the marker on. As a result, some campers need extra help or cannot take part as independently as others.</p>
+    <div class="grid2" style="margin-top:24px">
+      <figure><img src="img/marker.jpg" alt="Tippmann 98 Custom paintball marker"><figcaption>The camp's marker, a lightweight Tippmann 98 Custom. Our device must complement it, not replace it.</figcaption></figure>
+      <figure><img src="img/anatomy.jpg" alt="Labeled diagram of the general parts of a handgun, including the trigger, trigger guard and grip"><figcaption>Anatomy of a handgun-style marker. The trigger and trigger guard are the parts our device must act on. Source: Triangle Shooting Academy.</figcaption></figure>
+    </div>
+
+    <h2>Key learnings from research</h2>
+    <div class="learn">
+      <div><b>Existing solutions are too expensive</b><p>The HQ100 is the only product that meets all of the client's functional needs: chin, mouth, sip, bite or button control, recoil absorption, and a self-stabilizing base. It costs nearly $3,000 and has more features than the camp needs.</p></div>
+      <div><b>Current workarounds</b><p>Solenoid push-button actuators and sip-and-puff switches fire without a finger pull. Motorized pan-and-tilt mounts let players aim with a joystick or head array. Each is too costly or too narrow for every camper.</p></div>
+      <div><b>Ability varies by person, not diagnosis</b><p>Even within one diagnosis, function varies widely. Cerebral palsy's MACS scale runs from Level I (handles objects easily) to Level V (cannot handle objects). We design for the motion a camper can reliably make.</p></div>
+      <div><b>Low force is achievable</b><p>Commercial adaptive switches activate at about 10 g, 70 g, 100 g, and 156 g. Low-force interfaces can serve very different abilities.</p></div>
+      <div><b>Safety rules shape the design</b><p>Texas youth-camp rules treat paintball guns as pellet guns that need supervision and secure storage. ASTM F2272 requires markers not to discharge from jolts, and F1776 covers eye and face protection. We must preserve the marker's existing safety.</p></div>
+      <div><b>Cost matters to a nonprofit</b><p>Camp For All works with 65+ nonprofit partners and raises about $3.5 million a year to subsidize campers. Low upfront and maintenance cost matters more than features.</p></div>
+    </div>
+    <figure style="margin-top:28px">
+      <img src="img/stakeholders.jpg" alt="Stakeholder diagram: primary are campers with limited upper body and hand dexterity; secondary are operators and other campers; tertiary are owners and parents">
+      <figcaption>Stakeholders. Primary: campers with limited upper-body strength and hand dexterity. Secondary: camp operators and other campers. Tertiary: owners and parents.</figcaption>
+    </figure>
+
+    <h2>Desired features &amp; functions</h2>
+    <ul class="feat">
+      <li>Detaches from the paintball marker and is modular</li>
+      <li>Lets campers fire with limited or no physical force, including campers with no hands or limbs</li>
+      <li>Stands and stabilizes on its own, holding the marker's weight</li>
+      <li>Lets campers aim and rotate the marker</li>
+      <li>Preserves the marker's existing safety features and prevents unintended firing</li>
+      <li>Is easy for staff to clean, adjust, and maintain</li>
+      <li>Contains no latex, since some campers are allergic</li>
+      <li>Uses Camp For All's purple and green where possible (nice to have)</li>
     </ul>
-    <p class="cap">First three are constraints; the rest are ranked objectives.</p>
+
+    <h2>Design criteria</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Type</th><th>Criterion</th><th>Target value</th><th>Justification</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill">Constraint</span></td><td>Safe</td><td class="num">All NXL guidelines</td><td>The product fails if it isn't safe. Safety is always the first priority.</td></tr>
+        <tr><td><span class="pill">Constraint</span></td><td>Stable</td><td class="num">≥ 100 N on full device</td><td>Without this, the device can't do its basic job of holding the marker.</td></tr>
+        <tr><td><span class="pill">Constraint</span></td><td>Sturdy</td><td class="num">≥ 10 N on trigger</td><td>Below this, the trigger mechanism simply breaks.</td></tr>
+        <tr><td><span class="pill dim">Objective</span></td><td>Easy to use</td><td class="num">UDS Level ≥ 4</td><td>A spectrum, not a pass/fail. A hard-to-use device still works, but serves campers less well.</td></tr>
+        <tr><td><span class="pill dim">Objective</span></td><td>Enduring</td><td class="num">≥ 10,400 uses</td><td>The device could survive fewer uses and still work.</td></tr>
+        <tr><td><span class="pill dim">Objective</span></td><td>Economical</td><td class="num">≤ $40 per unit</td><td>Cost doesn't decide whether the problem is solved, but the camp is a nonprofit.</td></tr>
+        <tr><td><span class="pill dim">Objective</span></td><td>Easy to maintain</td><td class="num">&lt; 20 s to disassemble</td><td>Detaching quickly matters to staff but isn't required for function.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="cap">UDS (user-defined scale) for ease of use: 1 = needs continuous help · 3 = needs some help but fires independently · 4 = only minor staff setup · 5 = fully independent.</p>
+
+    <h2>Why the criteria matter</h2>
+    <p>We developed seven criteria, three constraints and four objectives, from our client interview, research, and the problems campers face at the range. Safety and stability are constraints because a device that can't safely hold the marker fails outright. The objectives improve the design without deciding whether it works.</p>
+    <p>We ranked <b>ease of use</b> first, because the point of the project is camper independence. A durable, cheap device that still needs constant staff help wouldn't solve the problem. <b>Durability</b> is second, since many campers will use it many times a day. <b>Cost</b> is third: a slightly higher cost is acceptable if it buys much better usability. <b>Maintenance</b> is last because it affects staff more than campers. These rankings guide concept selection toward the designs that most improve independence and long-term reliability.</p>
     <div class="next"><a href="#team">← Team</a><a href="#solution">Design Solution →</a></div>
   </div>
 
