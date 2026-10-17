@@ -89,15 +89,24 @@ p { margin: 0 0 14px; max-width: 58ch; }
 .stats span { font: 400 11.5px/1.4 var(--mono); color: var(--muted); }
 @media (max-width: 560px) { .stats { grid-template-columns: 1fr 1fr; } }
 
-.quote { border-left: 2px solid var(--blue); padding-left: 18px; font-size: 18px; color: #dfe6eb; max-width: 56ch; margin: 0; }
+.quote { border-left: 2px solid var(--blue); padding-left: 18px; font-size: 17px; color: #dfe6eb; max-width: 60ch; margin: 0; }
+.quote p:last-child { margin-bottom: 0; }
+.hero .lede { font-size: 16.5px; line-height: 1.65; }
 .quote cite { display: block; font: 400 12px/1.5 var(--mono); color: var(--muted); font-style: normal; margin-top: 10px; }
 
-/* parity */
-.subwrap { overflow-x: auto; margin: -28px 0 48px; border-bottom: 1px solid var(--line); }
-nav.sub { display: flex; gap: 4px; min-width: max-content; }
-nav.sub a { font: 400 12.5px/1 var(--mono); color: var(--muted); text-decoration: none; padding: 12px 10px 14px; border-bottom: 1px solid transparent; margin-bottom: -1px; transition: color .2s; }
-nav.sub a:hover { color: var(--fg); }
-nav.sub a[aria-current="true"] { color: var(--blue); border-bottom-color: var(--blue); }
+/* parity dropdown */
+.dd { position: relative; display: flex; align-items: center; }
+nav.tabs .dd-top { padding-right: 4px; }
+.dd-chev { background: none; border: 0; color: var(--muted); padding: 9px 8px 9px 2px; cursor: pointer; display: flex; align-items: center; border-radius: 6px; transition: color .2s, transform .2s; }
+.dd-chev:hover, .dd.open .dd-chev { color: var(--fg); }
+.dd.open .dd-chev svg { transform: rotate(180deg); }
+.dd-menu { position: absolute; right: 0; top: calc(100% + 8px); min-width: 210px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px; box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(143,211,255,.06); visibility: hidden; opacity: 0; transform: translateY(-4px); transition: opacity .18s, transform .18s, visibility 0s .18s; }
+.dd-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+.dd.open .dd-menu { visibility: visible; opacity: 1; transform: none; transition: opacity .18s, transform .18s; }
+@media (hover: hover) { .dd:hover .dd-menu { visibility: visible; opacity: 1; transform: none; transition: opacity .18s, transform .18s; } }
+nav.tabs .dd-menu a { display: block; padding: 11px 12px; border-radius: 8px; font-size: 13.5px; color: var(--muted); }
+nav.tabs .dd-menu a:hover { color: var(--fg); background: rgba(255,255,255,.04); }
+nav.tabs .dd-menu a[aria-current="true"] { color: var(--blue); }
 
 figure { margin: 0; }
 figure img { display: block; width: 100%; max-width: 100%; border-radius: 12px; border: 1px solid var(--line); background: #fff; }
@@ -139,7 +148,16 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
     <nav class="tabs" aria-label="Main">
       <a href="#about" data-tab="about">About Me</a>
       <a href="#unbound" data-tab="unbound">UNbound</a>
-      <a href="#parity" data-tab="parity">Parity Aim</a>
+      <div class="dd" id="dd">
+        <a href="#team" data-tab="parity" class="dd-top">Parity Aim</a><button class="dd-chev" id="dd-chev" type="button" aria-expanded="false" aria-controls="dd-menu" aria-label="Show Parity Aim sections"><svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-menu" id="dd-menu">
+          <a href="#team" data-stage="team">Team Pit Stop</a>
+          <a href="#analysis" data-stage="analysis">Design Analysis</a>
+          <a href="#solution" data-stage="solution">Design Solution</a>
+          <a href="#prototype" data-stage="prototype">Prototype Iteration</a>
+          <a href="#communication" data-stage="communication">Communication</a>
+        </div>
+      </div>
     </nav>
   </div>
 </header>
@@ -150,9 +168,9 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 <section class="page" id="p-about">
   <div class="hero">
     <div>
-      <p class="eyebrow">ECE @ Rice ’30 · QuestBridge Scholar</p>
-      <h1><span class="grad">Engineering for everyone.</span></h1>
-      <p class="lede">I'm Lukah, an electrical and computer engineering student focused on photonics, electronics, and nano-devices. I build things that give more people a fair shot.</p>
+      <p class="eyebrow">Nonprofit Founder | Electrical &amp; Computer Engineering @ Rice ’30</p>
+      <h1><span class="grad">Building sustainable systems that change the world.</span></h1>
+      <p class="lede">I'm an Electrical and Computer Engineering student and QuestBridge Scholar at Rice University, specializing in photonics, electronics, and nano-devices. As founder of the UNbound Youth Initiative, I work alongside an Oculus VR co-founder and a U.S. Political Advisor to the UN Security Council to build a six-month global curriculum that spans 13 countries and serves 1,000+ marginalized community members. In 2027, I'll keynote two international service-education conferences. My goal is a career engineering the hardware and systems that make advanced technology sustainable and accessible to the communities that need it most.</p>
       <div class="actions">
         <a class="btn" href="https://www.linkedin.com/in/lukah-villarreal-91a69737a/" target="_blank" rel="noopener">Connect on LinkedIn →</a>
         <a class="ghost" href="#parity">See my design work</a>
@@ -161,20 +179,14 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
     <img class="portrait" src="img/lukah.jpg" alt="Portrait of Lukah Villarreal">
   </div>
 
-  <h2>Now</h2>
-  <ul class="rows">
-    <li><span>Founder &amp; Chairman · <a href="#unbound">UNbound Youth Initiative</a></span><span class="r">2025 –</span></li>
-    <li><span>Founder · Lucid Studio</span><span class="r">2026 –</span></li>
-    <li><span>Ambassador · Global Citizens Initiative</span><span class="r">2025 –</span></li>
-    <li><span>Researcher · <a href="#parity">Parity Aim</a></span><span class="r">Fall 2026</span></li>
-  </ul>
-
   <h2>Skills</h2>
   <div class="skills">
-    <div><b>Engineering design</b><span>Criteria, screening, prototyping</span></div>
-    <div><b>Global leadership</b><span>Teams across 6 countries</span></div>
-    <div><b>Curricular design</b><span>SDG-aligned fellowship model</span></div>
-    <div><b>Public speaking</b><span>Keynotes, translation, pitching</span></div>
+    <div><b>Programming</b><span>C, Python, SQL, HTML, CSS, JS</span></div>
+    <div><b>Web &amp; UI/UX</b><span>Web development, interface design</span></div>
+    <div><b>Visual design</b><span>Graphic design, illustration, branding</span></div>
+    <div><b>Global leadership</b><span>SDG-aligned initiatives</span></div>
+    <div><b>Curricular design</b><span>Six-month global curriculum</span></div>
+    <div><b>Public speaking</b><span>Keynotes, Model UN</span></div>
   </div>
 </section>
 
@@ -182,7 +194,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 <section class="page" id="p-unbound">
   <p class="eyebrow">Founder &amp; Chairman · Est. March 2025</p>
   <h1>Leadership <span class="grad">unbound</span> by borders.</h1>
-  <p class="lede">A free, student-led fellowship where young leaders across six countries build real community projects.</p>
+  <p class="lede">The UNbound Youth Initiative is a global student-led leadership network that connects English-speaking schools around the world to equip students with the tools, guidance, and global lens to lead community-based service initiatives—sparking lasting impact that begins in schools and ripples outward.</p>
   <div class="actions">
     <a class="btn" href="https://unboundyi.org" target="_blank" rel="noopener">Explore UNbound →</a>
     <a class="ghost" href="https://unboundyi.org/#join" target="_blank" rel="noopener">Join the 2026–27 cohort</a>
@@ -195,24 +207,16 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
     <div><b>560+</b><span>people served</span></div>
     <div><b>$0</b><span>cost to fellows</span></div>
   </div>
-  <p class="cap">First fellowship, 2025–26. Speakers include an Oculus VR co-founder and a U.S. Political Advisor to the UN Security Council.</p>
 
   <h2>Why I started it</h2>
-  <p class="quote">Translating for Operation Smile surgeons in Monterrey convinced me that young people can change the world. UNbound gives them the tools to do it together.</p>
+  <div class="quote">
+    <p>For the past two years, I've had the incredible opportunity of volunteering for Operation Smile during their medical missions in Monterrey, Mexico—translating between surgeons and nurses and playing with child patients before life-changing cleft palate surgeries.</p>
+    <p>As ASFM OpSmile Liaison, still in high school, I was given the chance to make an actual difference. This experience convinced me: young people like myself can change the world. That's exactly why, in March of 2025, I founded the UNbound Youth Initiative... and why, only a few months later, my team and I united schools across the globe around this shared belief.</p>
+  </div>
 </section>
 
 <!-- PARITY AIM -->
 <section class="page" id="p-parity">
-  <div class="subwrap">
-    <nav class="sub" aria-label="Parity Aim stages">
-      <a href="#team" data-stage="team">Team Pit Stop</a>
-      <a href="#analysis" data-stage="analysis">Design Analysis</a>
-      <a href="#solution" data-stage="solution">Design Solution</a>
-      <a href="#prototype" data-stage="prototype">Prototype Iteration</a>
-      <a href="#communication" data-stage="communication">Communication</a>
-    </nav>
-  </div>
-
   <!-- TEAM PIT STOP -->
   <div class="stage" id="s-team">
     <p class="eyebrow">EDES 120/220 · Camp For All</p>
@@ -326,23 +330,25 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 <script>
 (function () {
   var stages = ["team", "analysis", "solution", "prototype", "communication"];
-  var last = "team";
-  try { last = localStorage.getItem("pa-stage") || "team"; } catch (e) {}
   function route() {
     var h = (location.hash || "#about").slice(1), tab = h, stage = null;
     if (stages.indexOf(h) > -1) { tab = "parity"; stage = h; }
     if (["about", "unbound", "parity"].indexOf(tab) < 0) tab = "about";
-    if (tab === "parity" && !stage) stage = stages.indexOf(last) > -1 ? last : "team";
+    if (tab === "parity" && !stage) stage = "team";
     document.querySelectorAll(".page").forEach(function (s) { s.classList.toggle("on", s.id === "p-" + tab); });
-    document.querySelectorAll("nav.tabs a").forEach(function (a) { a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"); });
+    document.querySelectorAll("nav.tabs a[data-tab]").forEach(function (a) { a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"); });
     if (stage) {
-      last = stage;
-      try { localStorage.setItem("pa-stage", stage); } catch (e) {}
       document.querySelectorAll(".stage").forEach(function (s) { s.classList.toggle("on", s.id === "s-" + stage); });
-      document.querySelectorAll("nav.sub a").forEach(function (a) { a.setAttribute("aria-current", a.dataset.stage === stage ? "true" : "false"); });
     }
+    document.querySelectorAll(".dd-menu a").forEach(function (a) { a.setAttribute("aria-current", a.dataset.stage === stage ? "true" : "false"); });
+    setOpen(false);
     window.scrollTo(0, 0);
   }
+  var dd = document.getElementById("dd"), chev = document.getElementById("dd-chev");
+  function setOpen(on) { dd.classList.toggle("open", on); chev.setAttribute("aria-expanded", on ? "true" : "false"); }
+  chev.addEventListener("click", function (e) { e.stopPropagation(); setOpen(!dd.classList.contains("open")); });
+  document.addEventListener("click", function (e) { if (!dd.contains(e.target)) setOpen(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
   window.addEventListener("hashchange", route);
   route();
 })();
