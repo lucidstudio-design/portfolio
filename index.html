@@ -8,28 +8,49 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="icon" type="image/svg+xml" href="emblem.svg">
+<link rel="icon" type="image/png" href="img/favicon-light.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="img/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="img/favicon-dark.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800&display=swap">
 <style>
-/* Single dark look: black ground, light-blue accent, faint grid + glow behind the hero. One narrow column. */
+/* Lucid palette on black: periwinkle CTAs, icy hovers, Maya-blue actives. Engineering type (IBM Plex) with Unbounded for display. */
 :root {
-  --bg: #050505;
-  --surface: #0d0f11;
-  --line: #1c2026;
-  --fg: #f2f5f7;
-  --muted: #8a929a;
-  --blue: #8fd3ff;
-  --blue-deep: #3aa8f0;
-  --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --bg: #000000;
+  --surface: #111113;
+  --line: #2A2A2A;
+  --fg: #F5F5F5;
+  --muted: #888888;
+  --peri: #8A84E2;
+  --peri-l: #BCB7F1;
+  --icy: #B7D3F2;
+  --maya: #79BEEE;
+  --blue: var(--peri-l);
+  --blue-deep: var(--maya);
+  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --head: "Unbounded", "IBM Plex Sans", Arial, sans-serif;
   color-scheme: dark;
 }
+/* Lucid custom cursor: hide the OS arrow on pointer devices only */
+@media (hover: hover) and (pointer: fine) { html, body, * { cursor: none !important; } }
+.cursor-ring, .cursor-dot { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+.cursor-ring { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--fg);
+  transition: width .4s cubic-bezier(.22,.8,.36,1), height .4s cubic-bezier(.22,.8,.36,1), background .4s cubic-bezier(.22,.8,.36,1), border-color .4s cubic-bezier(.22,.8,.36,1), opacity .3s ease; }
+.cursor-dot { width: 14px; height: 14px; background: url("img/mark-white.svg") center / contain no-repeat; transition: opacity .3s ease, filter .4s ease; }
+body.cursor-cta .cursor-ring { width: 110px; height: 110px; background: rgba(138, 132, 226, .22); border-color: rgba(138, 132, 226, 0); }
+body.cursor-cta .cursor-dot { opacity: 0; }
+body.cursor-on-light .cursor-ring { border-color: #000; }
+body.cursor-on-light .cursor-dot { filter: invert(1); }
+body.cursor-on-peri .cursor-ring { border-color: var(--icy); }
+@media (hover: none), (pointer: coarse) { .cursor-ring, .cursor-dot { display: none !important; } }
 * { box-sizing: border-box; }
 html, body { margin: 0; } img { max-width: 100%; } body { background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
 body::before {
   content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(700px 420px at 70% 0%, rgba(143, 211, 255, .13), transparent 70%),
-    radial-gradient(500px 300px at 10% 10%, rgba(58, 168, 240, .07), transparent 70%),
+    radial-gradient(700px 420px at 70% 0%, rgba(138,132,226, .13), transparent 70%),
+    radial-gradient(500px 300px at 10% 10%, rgba(121,190,238, .07), transparent 70%),
     linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 60px 60px,
     linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 60px 60px;
   -webkit-mask-image: linear-gradient(#000, transparent 640px); mask-image: linear-gradient(#000, transparent 640px);
@@ -39,15 +60,36 @@ a { color: inherit; }
 
 .wrap { max-width: 1160px; margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); }
 
-header.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(5,5,5,.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
-.mark { font: 700 15px/1 var(--sans); letter-spacing: -.02em; text-decoration: none; }
-.mark span { color: var(--blue); }
-nav.tabs { display: flex; gap: 2px; }
-nav.tabs a { font: 500 13px/1 var(--sans); text-decoration: none; color: var(--muted); padding: 9px 11px; border-radius: 8px; transition: color .2s; white-space: nowrap; }
-nav.tabs a:hover { color: var(--fg); }
-nav.tabs a[aria-current="page"] { color: var(--blue); }
-@media (max-width: 460px) { .mark { display: none; } .bar .wrap { justify-content: center; } }
+/* Nav: centred LUKAH wordmark, About on the left, UNbound + Parity Aim + socials on the right */
+header.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(0,0,0,.86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.06); }
+nav.tabs { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; min-height: 92px; }
+.nav-l, .nav-r { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.nav-r { justify-content: flex-end; }
+.emblem { display: inline-flex; color: var(--icy); padding: 6px; margin-right: 10px; transition: color .3s ease, transform .6s cubic-bezier(.22,.8,.36,1); }
+.emblem svg { width: 34px; height: 34px; display: block; }
+.emblem:hover { color: var(--peri); transform: rotate(90deg); }
+nav.tabs .wordmark { font: 800 clamp(30px, 4.2vw, 50px)/1 var(--head); letter-spacing: .14em; margin-right: -.14em; color: var(--fg); text-decoration: none; padding: 0; transition: color .3s ease; }
+nav.tabs .wordmark:hover { color: var(--icy); }
+nav.tabs .link { position: relative; font: 500 15px/1 var(--sans); text-decoration: none; color: #cfcfcf; padding: 10px 12px; transition: color .3s ease; white-space: nowrap; }
+nav.tabs .link::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; border-radius: 1px; background: var(--maya); transform: scaleX(0); transform-origin: right center; transition: transform .45s cubic-bezier(.22,.8,.36,1); }
+nav.tabs .link:hover { color: var(--peri-l); }
+nav.tabs .link[aria-current="page"] { color: var(--maya); }
+nav.tabs .link[aria-current="page"]::after { transform: scaleX(1); transform-origin: left center; }
+.socials { display: flex; align-items: center; gap: 4px; margin-left: 10px; padding-left: 14px; border-left: 1px solid var(--line); }
+.social { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 50%; color: #cfcfcf; border: 1px solid transparent; transition: color .3s ease, border-color .3s ease, background .3s ease; }
+.social svg { width: 17px; height: 17px; }
+.social:hover { color: #000; background: var(--peri); border-color: var(--peri); }
+@media (max-width: 860px) {
+  nav.tabs { grid-template-columns: auto 1fr auto; grid-template-areas: "l w s" "links links links"; row-gap: 4px; padding-block: 12px 8px; min-height: 0; }
+  .nav-l { display: contents; }
+  .emblem { grid-area: l; margin: 0; }
+  nav.tabs .wordmark { grid-area: w; justify-self: center; font-size: 30px; }
+  .nav-r { display: contents; }
+  .socials { grid-area: s; margin: 0; padding: 0; border: 0; }
+  .navlinks { grid-area: links; display: flex; justify-content: center; }
+}
+@media (min-width: 861px) { .navlinks { display: contents; } }
+@media (max-width: 420px) { nav.tabs .wordmark { font-size: 24px; } nav.tabs .link { font-size: 14px; padding: 10px 8px; } .social { width: 32px; height: 32px; } }
 
 main { padding-block: 72px 96px; }
 .page, .stage { display: none; }
@@ -57,24 +99,32 @@ main { padding-block: 72px 96px; }
 
 .eyebrow { font: 500 11.5px/1 var(--mono); text-transform: uppercase; letter-spacing: .16em; color: var(--blue); margin: 0 0 20px; display: flex; align-items: center; gap: 12px; }
 .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--blue); }
-h1 { font: 700 clamp(40px, 7.5vw, 64px)/1.04 var(--sans); letter-spacing: -.04em; margin: 0 0 20px; text-wrap: balance; }
-.grad { background: linear-gradient(135deg, #fff 0%, #dff2ff 45%, var(--blue) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+h1 { font: 700 clamp(34px, 5.4vw, 56px)/1.08 var(--head); letter-spacing: -.02em; margin: 0 0 20px; text-wrap: balance; }
+.grad { background: linear-gradient(135deg, #fff 0%, var(--icy) 45%, var(--peri) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 h2 { font: 600 13px/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 56px 0 18px; }
 p { margin: 0 0 14px; max-width: 58ch; }
 .lede { font-size: 18px; color: #c9d0d6; }
 .cap { font: 400 12px/1.5 var(--mono); color: var(--muted); margin-top: 10px; }
 
-.btn { display: inline-flex; align-items: center; gap: 10px; font: 600 15px/1 var(--sans); text-decoration: none; color: #04121c; background: var(--blue); padding: 16px 26px; border-radius: 10px; box-shadow: 0 0 24px rgba(143,211,255,.2); transition: box-shadow .25s, filter .25s; }
-.btn:hover { box-shadow: 0 0 36px rgba(143,211,255,.38); filter: brightness(1.06); }
-.ghost { font: 500 14px/1 var(--sans); color: var(--muted); text-decoration: none; padding: 16px 6px; transition: color .2s; }
-.ghost:hover { color: var(--fg); }
+/* Lucid CTAs: periwinkle pill, icy on hover, arrow swings from ↗ to →, magnetic pull via cursor.js */
+.btn { display: inline-flex; align-items: center; gap: 12px; padding: 18px 28px; border-radius: 999px; background: var(--peri); color: #000; font: 500 15px/1 var(--sans); text-decoration: none; border: 1px solid transparent; transition: background .35s ease, color .35s ease; position: relative; will-change: transform; }
+.btn:hover { background: var(--icy); }
+.ghost { display: inline-flex; align-items: center; gap: 12px; padding: 18px 28px; border-radius: 999px; background: transparent; color: var(--fg); font: 500 15px/1 var(--sans); text-decoration: none; border: 1px solid var(--line); transition: background .35s ease, border-color .35s ease; position: relative; will-change: transform; }
+.ghost:hover { background: rgba(138, 132, 226, .1); border-color: var(--peri); }
+.arrow { display: inline-block; font-weight: 400; font-size: 1.05em; line-height: 1; transition: transform .4s cubic-bezier(.22,.8,.36,1); transform: rotate(45deg); }
+.btn:hover .arrow, .ghost:hover .arrow { transform: rotate(0deg); }
+/* hero photo */
+.hero-photo { position: relative; margin: 0 0 48px; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 60px rgba(138,132,226,.12); }
+.hero-photo img { display: block; border: 0; border-radius: 0; background: none; width: 100%; height: min(62vh, 620px); object-fit: cover; object-position: 50% 30%; }
+.hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55)); pointer-events: none; }
+@media (max-width: 720px) { .hero-photo img { height: 46vh; object-position: 45% 30%; } }
 .actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 30px; }
 
 /* about */
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 80px; align-items: center; }
+.hero { display: block; }
 .hero > div { min-width: 0; }
-.hero h1 { font-size: clamp(40px, 5.2vw, 68px); max-width: 15ch; }
-.portrait { width: 100%; max-width: 380px; aspect-ratio: 3/4; object-fit: cover; border-radius: 18px; box-shadow: 0 0 0 1px rgba(143,211,255,.3), 0 0 40px rgba(143,211,255,.12), 0 0 90px rgba(58,168,240,.08); }
+.hero h1 { font-size: clamp(32px, 4.6vw, 60px); max-width: 20ch; }
+.portrait { width: 100%; max-width: 380px; aspect-ratio: 3/4; object-fit: cover; border-radius: 18px; box-shadow: 0 0 0 1px rgba(138,132,226,.3), 0 0 40px rgba(138,132,226,.12), 0 0 90px rgba(121,190,238,.08); }
 @media (max-width: 960px) { .hero { grid-template-columns: minmax(0, 1fr) 280px; gap: 48px; } }
 @media (max-width: 720px) { .hero { grid-template-columns: 1fr; gap: 28px; } .portrait { width: 180px; order: -1; } }
 
@@ -104,7 +154,7 @@ nav.tabs .dd-top { padding-right: 4px; }
 .dd-chev { background: none; border: 0; color: var(--muted); padding: 9px 8px 9px 2px; cursor: pointer; display: flex; align-items: center; border-radius: 6px; transition: color .2s, transform .2s; }
 .dd-chev:hover, .dd.open .dd-chev { color: var(--fg); }
 .dd.open .dd-chev svg { transform: rotate(180deg); }
-.dd-menu { position: absolute; right: 0; top: calc(100% + 8px); min-width: 210px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px; box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(143,211,255,.06); visibility: hidden; opacity: 0; transform: translateY(-4px); transition: opacity .18s, transform .18s, visibility 0s .18s; }
+.dd-menu { position: absolute; right: 0; top: calc(100% + 8px); min-width: 210px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px; box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(138,132,226,.06); visibility: hidden; opacity: 0; transform: translateY(-4px); transition: opacity .18s, transform .18s, visibility 0s .18s; }
 .dd-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
 .dd.open .dd-menu { visibility: visible; opacity: 1; transform: none; transition: opacity .18s, transform .18s; }
 @media (hover: hover) { .dd:hover .dd-menu { visibility: visible; opacity: 1; transform: none; transition: opacity .18s, transform .18s; } }
@@ -131,7 +181,7 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--muted); margin-top: 10
 
 .teamhead { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 28px; align-items: center; }
 .teamhead h1 { margin-bottom: 14px; }
-.logo { width: 120px; height: 120px; object-fit: contain; background: #fff; border-radius: 20px; padding: 10px; box-shadow: 0 0 40px rgba(143,211,255,.15); }
+.logo { width: 120px; height: 120px; object-fit: contain; background: #fff; border-radius: 20px; padding: 10px; box-shadow: 0 0 40px rgba(138,132,226,.15); }
 .meta { margin: 0; display: grid; gap: 8px; }
 .meta div { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 12px; }
 .meta dt { font: 400 12px/1.6 var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--blue); }
@@ -147,7 +197,7 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--muted); margin-top: 10
 @media (max-width: 560px) { .learn { grid-template-columns: 1fr; } }
 .feat { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
 .feat li { position: relative; padding-left: 22px; color: #c9d0d6; font-size: 15px; min-width: 0; }
-.feat li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--blue); box-shadow: 0 0 10px rgba(143,211,255,.5); }
+.feat li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--blue); box-shadow: 0 0 10px rgba(138,132,226,.5); }
 @media (max-width: 620px) { .feat { grid-template-columns: 1fr; } }
 .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
 .tbl table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14.5px; }
@@ -166,7 +216,7 @@ b { font-weight: 600; }
 .flow div.pt { background: var(--surface); }
 .flow div.sel { background: var(--blue); border-color: var(--blue); }
 .flow b { display: block; font: 700 30px/1 var(--sans); color: var(--blue); letter-spacing: -.03em; }
-.flow div.sel b, .flow div.sel span { color: #04121c; }
+.flow div.sel b, .flow div.sel span { color: #000000; }
 .flow span { font: 400 11px/1.4 var(--mono); color: var(--muted); }
 .flow i { font: 400 11px/1.2 var(--mono); font-style: normal; color: var(--muted); }
 .flow i::after { content: " →"; color: var(--blue); }
@@ -180,12 +230,12 @@ b { font-weight: 600; }
 .plain td:nth-child(1) { font-weight: 600; }
 .plain td:nth-child(3) { color: var(--muted); }
 .todo { margin-top: 20px; border: 1px dashed var(--line); border-radius: 12px; padding: 14px 18px; color: var(--muted); font-size: 14px; }
-.video { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 0 40px rgba(143,211,255,.08); }
+.video { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 0 40px rgba(138,132,226,.08); }
 .video video { display: block; width: 100%; aspect-ratio: 16/9; background: #000; }
 .note { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 16px 18px; color: #c9d0d6; font-size: 15px; }
 .note b { color: var(--blue); font-weight: 500; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 6px; }
 
-.pill { font: 400 11px/1 var(--mono); color: var(--blue); border: 1px solid rgba(143,211,255,.35); border-radius: 99px; padding: 5px 9px; white-space: nowrap; }
+.pill { font: 400 11px/1 var(--mono); color: var(--blue); border: 1px solid rgba(138,132,226,.35); border-radius: 99px; padding: 5px 9px; white-space: nowrap; }
 .pill.dim { color: var(--muted); border-color: var(--line); }
 
 .next { display: flex; justify-content: space-between; margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); font: 400 12.5px/1 var(--mono); }
@@ -200,13 +250,28 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 
 
 <header class="bar">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="emblem-mark" viewBox="0 0 1932 1932">
+      <path fill-rule="evenodd" d="M966 219a747 747 0 1 0 0.01 0z M966 459a516 516 0 1 1 -0.01 0z"/>
+      <path fill-rule="evenodd" d="M1175 444a364 364 0 1 0 0.01 0z M1175 650a158 158 0 1 1 -0.01 0z"/>
+      <path d="M908 232 L944 16 Q966 -10 988 16 L1024 232 Z"/>
+      <path d="M908 232 L944 16 Q966 -10 988 16 L1024 232 Z" transform="rotate(90 966 966)"/>
+      <path d="M908 232 L944 16 Q966 -10 988 16 L1024 232 Z" transform="rotate(180 966 966)"/>
+      <path d="M908 232 L944 16 Q966 -10 988 16 L1024 232 Z" transform="rotate(270 966 966)"/>
+    </symbol>
+  </svg>
   <div class="wrap">
-    <a class="mark" href="#about">Lukah Villarreal<span>.</span></a>
     <nav class="tabs" aria-label="Main">
-      <a href="#about" data-tab="about">About Me</a>
-      <a href="#unbound" data-tab="unbound">UNbound</a>
+      <div class="nav-l">
+        <a class="emblem" href="#about" aria-label="Home"><svg viewBox="0 0 1932 1932" fill="currentColor" aria-hidden="true"><use href="#emblem-mark"/></svg></a>
+        <span class="navlinks"><a class="link" href="#about" data-tab="about">About</a></span>
+      </div>
+      <a class="wordmark" href="#about">LUKAH</a>
+      <div class="nav-r">
+      <span class="navlinks">
+      <a class="link" href="#unbound" data-tab="unbound">UNbound</a>
       <div class="dd" id="dd">
-        <a href="#team" data-tab="parity" class="dd-top">Parity Aim</a><button class="dd-chev" id="dd-chev" type="button" aria-expanded="false" aria-controls="dd-menu" aria-label="Show Parity Aim sections"><svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <a href="#team" data-tab="parity" class="link dd-top">Parity Aim</a><button class="dd-chev" id="dd-chev" type="button" aria-expanded="false" aria-controls="dd-menu" aria-label="Show Parity Aim sections"><svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="dd-menu" id="dd-menu">
           <a href="#team" data-stage="team">Team Pit Stop</a>
           <a href="#analysis" data-stage="analysis">Design Analysis</a>
@@ -214,6 +279,12 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
           <a href="#prototype" data-stage="prototype">Prototype Iteration</a>
           <a href="#communication" data-stage="communication">Communication</a>
         </div>
+      </div>
+      </span>
+      <span class="socials">
+        <a class="social" href="https://www.instagram.com/lukahvillarreal/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="social" href="https://www.linkedin.com/in/lukah-villarreal" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.6h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.55 4.77 5.86v5.49h-4v-4.87c0-1.16-.02-2.66-1.68-2.66-1.68 0-1.94 1.27-1.94 2.58v4.95h-4z"/></svg></a>
+      </span>
       </div>
     </nav>
   </div>
@@ -223,17 +294,17 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 
 <!-- ABOUT -->
 <section class="page" id="p-about">
+  <figure class="hero-photo"><img src="img/hero.jpg" alt="Lukah Villarreal, center, in conversation at a networking event"></figure>
   <div class="hero">
     <div>
       <p class="eyebrow">Nonprofit Founder | Electrical &amp; Computer Engineering @ Rice ’30</p>
       <h1><span class="grad">Building sustainable systems that change the world.</span></h1>
       <p class="lede">I'm an Electrical and Computer Engineering student and QuestBridge Scholar at Rice University, specializing in photonics, electronics, and nano-devices. As founder of the UNbound Youth Initiative, I work alongside an Oculus VR co-founder and a U.S. Political Advisor to the UN Security Council to build a six-month global curriculum that spans 13 countries and serves 1,000+ marginalized community members. In 2027, I'll keynote two international service-education conferences. My goal is a career engineering the hardware and systems that make advanced technology sustainable and accessible to the communities that need it most.</p>
       <div class="actions">
-        <a class="btn" href="https://www.linkedin.com/in/lukah-villarreal-91a69737a/" target="_blank" rel="noopener">Connect on LinkedIn →</a>
-        <a class="ghost" href="#parity">See my design work</a>
+        <a class="btn" href="https://www.linkedin.com/in/lukah-villarreal" target="_blank" rel="noopener" data-cursor="cta">Connect on LinkedIn <span class="arrow">↗</span></a>
+        <a class="ghost" href="#parity" data-cursor="cta">See my design work <span class="arrow">↗</span></a>
       </div>
     </div>
-    <img class="portrait" src="img/lukah.jpg" alt="Portrait of Lukah Villarreal">
   </div>
 
   <h2>Skills</h2>
@@ -253,8 +324,8 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
   <h1>Leadership <span class="grad">unbound</span> by borders.</h1>
   <p class="lede">The UNbound Youth Initiative is a global student-led leadership network that connects English-speaking schools around the world to equip students with the tools, guidance, and global lens to lead community-based service initiatives—sparking lasting impact that begins in schools and ripples outward.</p>
   <div class="actions">
-    <a class="btn" href="https://unboundyi.org" target="_blank" rel="noopener">Explore UNbound →</a>
-    <a class="ghost" href="https://unboundyi.org/#join" target="_blank" rel="noopener">Join the 2026–27 cohort</a>
+    <a class="btn" href="https://unboundyi.org" target="_blank" rel="noopener" data-cursor="cta">Explore UNbound <span class="arrow">↗</span></a>
+    <a class="ghost" href="https://unboundyi.org/#join" target="_blank" rel="noopener" data-cursor="cta">Join the 2026–27 cohort <span class="arrow">↗</span></a>
   </div>
 
   <h2>By the numbers</h2>
@@ -429,10 +500,10 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
         <g stroke="#1c2026"><line x1="80" y1="4" x2="80" y2="176"/><line x1="186" y1="4" x2="186" y2="176"/><line x1="292" y1="4" x2="292" y2="176"/><line x1="398" y1="4" x2="398" y2="176"/><line x1="504" y1="4" x2="504" y2="176"/><line x1="610" y1="4" x2="610" y2="176"/></g>
         <g fill="#8a929a" font-size="11" text-anchor="middle"><text x="80" y="194">0</text><text x="186" y="194">1</text><text x="292" y="194">2</text><text x="398" y="194">3</text><text x="504" y="194">4</text><text x="610" y="194">5</text></g>
         <g font-size="12" fill="#f2f5f7"><text x="0" y="22">Idea 12</text><text x="0" y="50">Idea 14</text><text x="0" y="78" fill="#8a929a">Idea 5</text><text x="0" y="106" fill="#8a929a">Idea 22</text><text x="0" y="134" fill="#8a929a">Idea 26</text><text x="0" y="162" fill="#8a929a">Idea 30</text></g>
-        <rect x="80" y="10" width="360.4" height="16" rx="3" fill="#8fd3ff"/>
-        <rect x="80" y="38" width="360.4" height="16" rx="3" fill="#8fd3ff"/>
+        <rect x="80" y="10" width="360.4" height="16" rx="3" fill="#BCB7F1"/>
+        <rect x="80" y="38" width="360.4" height="16" rx="3" fill="#BCB7F1"/>
         <g fill="#2a3139"><rect x="80" y="66" width="328.6" height="16" rx="3"/><rect x="80" y="94" width="318" height="16" rx="3"/><rect x="80" y="122" width="318" height="16" rx="3"/><rect x="80" y="150" width="296.8" height="16" rx="3"/></g>
-        <g font-size="11.5"><text x="448" y="22" fill="#8fd3ff">3.4</text><text x="448" y="50" fill="#8fd3ff">3.4</text><text x="416" y="78" fill="#8a929a">3.1</text><text x="406" y="106" fill="#8a929a">3.0</text><text x="406" y="134" fill="#8a929a">3.0</text><text x="385" y="162" fill="#8a929a">2.8</text></g>
+        <g font-size="11.5"><text x="448" y="22" fill="#BCB7F1">3.4</text><text x="448" y="50" fill="#BCB7F1">3.4</text><text x="416" y="78" fill="#8a929a">3.1</text><text x="406" y="106" fill="#8a929a">3.0</text><text x="406" y="134" fill="#8a929a">3.0</text><text x="385" y="162" fill="#8a929a">2.8</text></g>
       </svg>
     </div>
     <p class="cap">Top 6 of 10. Weights: ease of use 0.4 · durability 0.3 · cost 0.2 · maintenance 0.1</p>
@@ -547,7 +618,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 </main>
 
 <footer>
-  <div class="wrap"><span>© 2026 Lukah Villarreal</span><a href="https://www.linkedin.com/in/lukah-villarreal-91a69737a/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+  <div class="wrap"><span>© 2026 Lukah Villarreal</span><a href="https://www.linkedin.com/in/lukah-villarreal" target="_blank" rel="noopener">LinkedIn ↗</a></div>
 </footer>
 
 <script>
@@ -576,6 +647,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
   route();
 })();
 </script>
+<script src="js/cursor.js"></script>
 
 </body>
 </html>

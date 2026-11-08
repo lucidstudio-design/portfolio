@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1932 1932">
+  <style>
+    .m { fill: #000000; }
+    @media (prefers-color-scheme: dark) { .m { fill: #B7D3F2; } }
+  </style>
+  <g class="m">
+    <path fill-rule="evenodd" d="M966 219a747 747 0 1 0 0.01 0z M966 459a516 516 0 1 1 -0.01 0z"/>
+    <path fill-rule="evenodd" d="M1175 444a364 364 0 1 0 0.01 0z M1175 650a158 158 0 1 1 -0.01 0z"/>
+    <g id="spike"><path d="M908 232 L944 16 Q966 -10 988 16 L1024 232 Z"/></g>
+    <use href="#spike" transform="rotate(90 966 966)"/>
+    <use href="#spike" transform="rotate(180 966 966)"/>
+    <use href="#spike" transform="rotate(270 966 966)"/>
+  </g>
+</svg>
