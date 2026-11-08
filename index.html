@@ -359,7 +359,6 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
     <img src="img/ub-5.jpg" alt="Families at an Operation Smile event">
     <img src="img/ub-6.jpg" alt="Students writing in class">
     <div class="car-ui">
-      <span class="car-cap" id="ub-cap">Miles for Smiles charity race</span>
       <div class="car-dots" id="ub-dots"></div>
       <div class="car-arrows"><button type="button" id="ub-prev" aria-label="Previous photo">‹</button><button type="button" id="ub-next" aria-label="Next photo">›</button></div>
     </div>
@@ -698,7 +697,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
     i = (k + imgs.length) % imgs.length;
     imgs.forEach(function (im, n) { im.classList.toggle("on", n === i); });
     dots.querySelectorAll("button").forEach(function (b, n) { b.setAttribute("aria-current", n === i ? "true" : "false"); });
-    cap.textContent = imgs[i].alt;
+    if (cap) cap.textContent = imgs[i].alt;
   }
   function restart() { clearInterval(timer); if (!matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(function () { go(i + 1); }, 5000); }
   document.getElementById("ub-prev").addEventListener("click", function () { go(i - 1); restart(); });
