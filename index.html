@@ -80,13 +80,15 @@ nav.tabs .link[aria-current="page"]::after { transform: scaleX(1); transform-ori
 .social svg { width: 17px; height: 17px; }
 .social:hover { color: #000; background: var(--peri); border-color: var(--peri); }
 @media (max-width: 860px) {
-  nav.tabs { grid-template-columns: auto 1fr auto; grid-template-areas: "l w s" "links links links"; row-gap: 4px; padding-block: 12px 8px; min-height: 0; }
+  nav.tabs { grid-template-columns: 1fr auto 1fr; grid-template-areas: "l w s" "la ra ra"; row-gap: 4px; padding-block: 12px 8px; min-height: 0; }
   .nav-l { display: contents; }
-  .emblem { grid-area: l; margin: 0; }
+  .emblem { grid-area: l; margin: 0; justify-self: start; }
   nav.tabs .wordmark { grid-area: w; justify-self: center; font-size: 30px; }
   .nav-r { display: contents; }
-  .socials { grid-area: s; margin: 0; padding: 0; border: 0; }
-  .navlinks { grid-area: links; display: flex; justify-content: center; }
+  .socials { grid-area: s; margin: 0; padding: 0; border: 0; justify-self: end; }
+  .navlinks { display: flex; }
+  .nav-l .navlinks { grid-area: la; justify-self: end; }
+  .nav-r .navlinks { grid-area: ra; justify-self: start; }
 }
 @media (min-width: 861px) { .navlinks { display: contents; } }
 @media (max-width: 420px) { nav.tabs .wordmark { font-size: 24px; } nav.tabs .link { font-size: 14px; padding: 10px 8px; } .social { width: 32px; height: 32px; } }
