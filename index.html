@@ -116,9 +116,9 @@ p { margin: 0 0 14px; max-width: 58ch; }
 .arrow { display: inline-block; font-weight: 400; font-size: 1.05em; line-height: 1; transition: transform .4s cubic-bezier(.22,.8,.36,1); transform: rotate(45deg); }
 .btn:hover .arrow, .ghost:hover .arrow { transform: rotate(0deg); }
 /* hero photo */
-/* sits flush under the nav; cropped to keep 7.4%–86.6% of the photo's height */
+/* sits flush under the nav; cropped to keep 12%-86.6% of the photo height */
 .hero-photo { position: relative; margin: -28px 0 44px; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 60px rgba(138,132,226,.12); }
-.hero-photo img { display: block; border: 0; border-radius: 0; background: none; width: 100%; height: auto; aspect-ratio: 1316 / 784; object-fit: cover; object-position: 50% 35.6%; }
+.hero-photo img { display: block; border: 0; border-radius: 0; background: none; width: 100%; height: auto; aspect-ratio: 1316 / 738; object-fit: cover; object-position: 50% 47.2%; }
 /* UNbound: text left, carousel right */
 .ub-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
 .ub-hero .carousel { margin: 0; aspect-ratio: 4 / 3; }
@@ -660,6 +660,9 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 
 <script>
 (function () {
+  // Always open at the top: a restored scroll position would tuck the hero under the sticky nav.
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  window.addEventListener("load", function () { window.scrollTo(0, 0); });
   var stages = ["team", "analysis", "solution", "prototype", "communication"];
   function route() {
     var h = (location.hash || "#about").slice(1), tab = h, stage = null;
