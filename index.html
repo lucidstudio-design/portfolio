@@ -158,6 +158,30 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--muted); margin-top: 10
 .tbl td:nth-child(4) { color: var(--muted); }
 .tbl td.num { font-family: var(--mono); font-size: 13px; color: var(--blue); white-space: nowrap; }
 b { font-weight: 600; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+.grid3 > * { min-width: 0; }
+@media (max-width: 620px) { .grid3 { grid-template-columns: 1fr; } }
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.flow div { background: #000; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; min-width: 92px; text-align: center; }
+.flow div.pt { background: var(--surface); }
+.flow div.sel { background: var(--blue); border-color: var(--blue); }
+.flow b { display: block; font: 700 30px/1 var(--sans); color: var(--blue); letter-spacing: -.03em; }
+.flow div.sel b, .flow div.sel span { color: #04121c; }
+.flow span { font: 400 11px/1.4 var(--mono); color: var(--muted); }
+.flow i { font: 400 11px/1.2 var(--mono); font-style: normal; color: var(--muted); }
+.flow i::after { content: " →"; color: var(--blue); }
+.steps { margin: 0; padding-left: 20px; color: #c9d0d6; font-size: 15px; display: grid; gap: 8px; }
+.iter { margin: 0; border-top: 1px solid var(--line); }
+.iter div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.iter dt { font: 400 12px/1.6 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--blue); }
+.iter dd { margin: 0; font-size: 15px; color: #c9d0d6; }
+@media (max-width: 560px) { .iter div { grid-template-columns: 1fr; gap: 2px; } }
+.plain td:nth-child(2) { font-weight: 400; white-space: normal; color: #c9d0d6; }
+.plain td:nth-child(1) { font-weight: 600; }
+.plain td:nth-child(3) { color: var(--muted); }
+.todo { margin-top: 20px; border: 1px dashed var(--line); border-radius: 12px; padding: 14px 18px; color: var(--muted); font-size: 14px; }
+.video { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 0 40px rgba(143,211,255,.08); }
+.video video { display: block; width: 100%; aspect-ratio: 16/9; background: #000; }
 .note { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 16px 18px; color: #c9d0d6; font-size: 15px; }
 .note b { color: var(--blue); font-weight: 500; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: 6px; }
 
@@ -350,16 +374,56 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 
   <!-- DESIGN SOLUTION -->
   <div class="stage" id="s-solution">
-    <p class="eyebrow">Stage 03</p>
+    <p class="eyebrow">Stage 03 · EDP 4–6</p>
     <h1>Design Solution</h1>
-    <p class="lede">We went from 74 rough ideas to 2 finalists.</p>
-    <div class="stats" style="margin-top:32px">
-      <div><b>74</b><span>partial ideas</span></div>
-      <div><b>30</b><span>morphed concepts</span></div>
-      <div><b>10</b><span>after screening</span></div>
-      <div><b>2</b><span>finalists</span></div>
+    <p class="lede">From 77 partial ideas to one selected concept, then a detailed design ready to prototype.</p>
+
+    <h2>EDP 4 · Brainstorming</h2>
+    <div class="grid2">
+      <figure><img src="img/blocks.jpg" alt="Hand-drawn design blocks: stand, axis, mount, trigger"><figcaption>We split the problem into design blocks before brainstorming.</figcaption></figure>
+      <ul class="rows">
+        <li><span>Stand</span><span class="r">Holds the marker's weight and keeps it level</span></li>
+        <li><span>Mount</span><span class="r">Attaches directly to the marker</span></li>
+        <li><span>Axis</span><span class="r">Rotates the marker so the camper can aim</span></li>
+        <li><span>Trigger interface</span><span class="r">How the camper signals "fire"</span></li>
+        <li><span>Trigger activator</span><span class="r">Physically pulls the trigger</span></li>
+      </ul>
     </div>
-    <h2>Weighted scores</h2>
+    <div class="stats" style="margin-top:24px">
+      <div><b>60</b><span>round 1 ideas · 45 min</span></div>
+      <div><b>45</b><span>unique after sharing</span></div>
+      <div><b>14</b><span>round 2 ideas · 30 min</span></div>
+      <div><b>0</b><span>complete ideas</span></div>
+    </div>
+    <p>Round 1 aimed for volume using the slip method. Round 2 went deeper into how each mechanism would actually work. Every idea solved only one block, so none were complete devices. Camera tripods and the existing products from our research inspired many of them.</p>
+    <div class="grid3">
+      <figure><img src="img/slips-trigger.jpg" alt="Sticky-note sketches of trigger ideas"><figcaption>Trigger ideas</figcaption></figure>
+      <figure><img src="img/x13.jpg" alt="Sticky-note sketches of axis ideas"><figcaption>Axis ideas</figcaption></figure>
+      <figure><img src="img/x14.jpg" alt="Sticky-note sketches of mount ideas"><figcaption>Mount ideas</figcaption></figure>
+    </div>
+
+    <h2>EDP 5 · Evaluating</h2>
+    <div class="flow">
+      <div class="pt"><b>77</b><span>partial</span></div><i>Pugh screen</i>
+      <div class="pt"><b>17</b><span>partial</span></div><i>Morph</i>
+      <div><b>30</b><span>complete</span></div><i>Pugh screen</i>
+      <div><b>10</b><span>complete</span></div><i>Score</i>
+      <div><b>2</b><span>finalists</span></div><i>Select</i>
+      <div class="sel"><b>1</b><span>Idea 12</span></div>
+    </div>
+    <p style="margin-top:20px"><b>Screening</b> compared each idea to a datum (+ / 0 / −) on all six criteria. We screened partial ideas within each block, combined the 17 survivors in a morph chart, then screened the 30 complete ideas. <b>Scoring</b> rated the final 10 from 1 to 5 using measurable proxies, weighted by our objective ranking. Constraints weren't scored because every design must meet them.</p>
+    <ul class="rows">
+      <li><span>Mount</span><span class="r">11 → 3 · best: Y-stand (+4)</span></li>
+      <li><span>Trigger</span><span class="r">12 → 2 · best: spring + rod (+5)</span></li>
+      <li><span>Trigger interface</span><span class="r">16 → 4 · best: elephant method (+5)</span></li>
+      <li><span>Stand</span><span class="r">16 → 3 · best: Y-stand (+1)</span></li>
+      <li><span>Axis</span><span class="r">22 → 5 · best: tripod (+6)</span></li>
+    </ul>
+    <figure style="margin-top:28px">
+      <img src="img/top10.jpg" alt="Sketches of the ten screened complete concepts">
+      <figcaption>The 10 complete concepts that survived screening.</figcaption>
+    </figure>
+    <h3>Weighted scores</h3>
     <div class="chart" role="img" aria-label="Weighted Pugh scores out of 5. Ideas 12 and 14 tie at 3.4.">
       <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg">
         <g stroke="#1c2026"><line x1="80" y1="4" x2="80" y2="176"/><line x1="186" y1="4" x2="186" y2="176"/><line x1="292" y1="4" x2="292" y2="176"/><line x1="398" y1="4" x2="398" y2="176"/><line x1="504" y1="4" x2="504" y2="176"/><line x1="610" y1="4" x2="610" y2="176"/></g>
@@ -372,27 +436,83 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
       </svg>
     </div>
     <p class="cap">Top 6 of 10. Weights: ease of use 0.4 · durability 0.3 · cost 0.2 · maintenance 0.1</p>
-    <figure style="margin-top:28px">
-      <img src="img/top10.jpg" alt="Sketches of the ten screened concepts">
-      <figcaption>Finalists: Idea 12 (foot-aimed tripod) and Idea 14 (head-activated trigger). Both share a Y-stand mount and spring-rod trigger.</figcaption>
+    <div class="note" style="margin-top:20px"><b>Why Idea 12</b>Ideas 12 and 14 tied at 3.4. Both rated 4/5 on ease of use and share a Y-stand mount and spring-rod trigger. We chose Idea 12 because it stays more true to the traditional paintball experience: the camper aims and fires the marker rather than steering it with head movement.</div>
+
+    <h2>EDP 6 · Prototype concept</h2>
+    <figure>
+      <img src="img/concept-sketch.jpg" alt="Annotated concept sketch: Y-stand mount with slots around the pistol grip, a vertical stand, and a rotating axis disk on a fixed base, with dimensions and a side view of the bearing">
+      <figcaption>Annotated concept. A 3D-printed Y-stand mount slots around the pistol grip, a stand rises from a rotating disk, and a bearing between the fixed and rotating disks forms the axis. Dimensions are approximate until we receive the marker.</figcaption>
     </figure>
+    <div class="grid2" style="margin-top:20px">
+      <figure><img src="img/spring-rod.jpg" alt="Sketch of the spring-and-rod trigger: one end mounts onto the lower end of the elephant-method extension, the other is pulled by the camper's feet"><figcaption>Spring + rod trigger. One end mounts onto the elephant-method extension. Campers pull the other end with their feet, like the camp's adaptive archery.</figcaption></figure>
+      <figure><img src="img/user-flow.jpg" alt="User flowchart: sit down, place feet on rotating base, rotate base with feet to aim, find target, pull elephant method or foot trigger to shoot"><figcaption>How a camper uses the device.</figcaption></figure>
+    </div>
+    <div class="grid2" style="margin-top:28px">
+      <div>
+        <h3 style="margin-top:0">Staff setup</h3>
+        <ol class="steps">
+          <li>Secure the elephant-method extension onto the existing trigger.</li>
+          <li>Seat the marker in the slots around the pistol grip and Y-stand mount.</li>
+          <li>Attach the spring + rod mechanism around the extended trigger.</li>
+        </ol>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Camper use</h3>
+        <ol class="steps">
+          <li>Sit behind the device and place feet on the rotating foot disk.</li>
+          <li>Rotate the base with the feet to aim.</li>
+          <li>Fire with the elephant method or the foot button.</li>
+        </ol>
+      </div>
+    </div>
+    <h3>Manufacturing and training</h3>
+    <p>The mount, elephant-method extension, and Y-stand are designed in CAD and 3D printed. The base uses OEDK bearings, with wood and metal for the stand and disks. Each part slots into the next, so integration stays simple.</p>
+    <ul class="rows">
+      <li><span>3D printing and laser cutter</span><span class="r">Nov 2–6 · required</span></li>
+      <li><span>Waterjet or plasma cutter</span><span class="r">Nov 9–13 · for metal parts</span></li>
+      <li><span>CNC</span><span class="r">Nov 9–13 · if tighter tolerances are needed</span></li>
+      <li><span>Machine shop safety</span><span class="r">Before fabrication</span></li>
+    </ul>
     <div class="next"><a href="#analysis">← Analysis</a><a href="#prototype">Prototype Iteration →</a></div>
   </div>
 
   <!-- PROTOTYPE ITERATION -->
   <div class="stage" id="s-prototype">
-    <p class="eyebrow">Stage 04</p>
+    <p class="eyebrow">Stage 04 · Early iterations</p>
     <h1>Prototype Iteration</h1>
-    <p class="lede">Build, test against the criteria, rebuild.</p>
-    <ul class="rows" style="margin-top:32px">
-      <li><span>v1 · Lo-fi stand and mount</span><span class="pill">Next</span></li>
-      <li><span>v2 · Low-force trigger</span><span class="pill dim">Planned</span></li>
-      <li><span>v3 · Integrated prototype</span><span class="pill dim">Planned</span></li>
-    </ul>
-    <figure style="margin-top:28px">
-      <img src="img/morph-sketches.jpg" alt="Sketches of morphed concepts 11 to 30">
-      <figcaption>Morphed concepts, the starting point for v1.</figcaption>
-    </figure>
+    <p class="lede">Two iterations so far: a cardboard proof of concept, then a CAD and 3D-printed v2.</p>
+
+    <div class="note" style="margin-top:28px"><b>The big pivot</b>Lo-fi testing showed that Idea 12's original support and rotation mechanism didn't work as well as expected. Inspired by a pottery wheel, we redesigned it as a foot-driven rotating base that carries the marker's weight while the camper aims with their feet.</div>
+
+    <h2>v1 · Lo-fi foot axis, Y-stand, and mount</h2>
+    <dl class="iter">
+      <div><dt>Built from</dt><dd>Cardboard, straws, string, hot glue, tape, small bearings, and dowel rods, at a small scale. Each subsystem was built separately.</dd></div>
+      <div><dt>Purpose</dt><dd>Check the idea and geometry cheaply before CAD. Can the Y-stand hold the marker steady? Can a bearing turn a moving stand on top of a fixed one? Can the mount fit the marker?</dd></div>
+      <div><dt>Results</dt><dd>The Y-stand stands on its own and the axis rotates a full 360°, more than we need. The materials can't hold a real marker, but that is a limit of lo-fi materials, not of the design. The Y-stand and spring + rod trigger worked as expected.</dd></div>
+      <div><dt>Lessons</dt><dd>Add stops to limit rotation to about 120° for safety. Raise the front and back mounts above the middle to cradle the marker. The scaled-down base couldn't be connected to the full-size parts, so integration is untested.</dd></div>
+      <div><dt>Next</dt><dd>Move every component into CAD, with a larger bearing and more durable materials.</dd></div>
+    </dl>
+
+    <h2>v2 · CAD mount, trigger, interface, stand, and axis</h2>
+    <dl class="iter">
+      <div><dt>Purpose</dt><dd>Improve durability and precision, much closer to the device's real function.</dd></div>
+      <div><dt>Results</dt><dd>The axis turns smoothly through 360°. The stand supports the proportional weight of a 3D-printed model marker, and the mount fits snugly around it.</dd></div>
+      <div><dt>Feedback</dt><dd>Dr. Heather Bisesti suggested adding vertical adjustment to better match the paintball experience, and a push trigger so campers with limited strength can fire more easily.</dd></div>
+      <div><dt>Next</dt><dd>Build and test a push-trigger version with adjustable height, and 3D print the elephant method.</dd></div>
+    </dl>
+
+    <h2>Medium-fidelity plan</h2>
+    <div class="tbl plain"><table>
+      <thead><tr><th>Feature</th><th>Next iteration</th><th>Owner</th><th>Time</th></tr></thead>
+      <tbody>
+        <tr><td>Rotating base + bearing</td><td>Two CAD-designed plates with a press-fit bearing, replacing the lo-fi dowel rod</td><td>Lukah</td><td class="num">6–8 hr</td></tr>
+        <tr><td>Scaled marker model</td><td>3D-printed Tippmann model to test fit without a live marker</td><td>Jason</td><td class="num">6–8 hr</td></tr>
+        <tr><td>Y-stand support</td><td>A realistic Y-stand that holds the model and connects to the base</td><td>Reid</td><td class="num">4–6 hr</td></tr>
+        <tr><td>Spring + rod and elephant method</td><td>Mid-fi models to check movement and interference, non-firing</td><td>Jason</td><td class="num">4–6 hr</td></tr>
+        <tr><td>System integration</td><td>Assemble everything, test rotation and stability, revise CAD</td><td>Team</td><td class="num">6–8 hr</td></tr>
+      </tbody>
+    </table></div>
+    <div class="todo">Prototype photos for v1 and v2 will be added here.</div>
     <div class="next"><a href="#solution">← Solution</a><a href="#communication">Communication →</a></div>
   </div>
 
@@ -401,16 +521,25 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
     <p class="eyebrow">Stage 05</p>
     <h1>Communication</h1>
     <p class="lede">Reviews, feedback, and what changed because of it.</p>
+    <h2>Oral presentation</h2>
+    <div class="video">
+      <video controls preload="none" playsinline poster="img/video-poster.jpg">
+        <source src="media/presentation.mp4" type="video/mp4">
+        Your browser can't play this video. <a href="media/presentation.mp4">Download it instead.</a>
+      </video>
+    </div>
+    <p class="cap">Parity Aim prototype presentation · 14 min · Jason Fu, Reid Waldon, Lukah Villarreal</p>
     <h2>Milestones</h2>
     <ul class="rows">
       <li><span>Client interview</span><span class="pill">Done</span></li>
       <li><span>Research &amp; criteria review</span><span class="pill">Done</span></li>
       <li><span>Brainstorm &amp; evaluation review</span><span class="pill">Done</span></li>
-      <li><span>Peer feedback · Week 8</span><span class="pill dim">Upcoming</span></li>
-      <li><span>Design reviews &amp; poster</span><span class="pill dim">Upcoming</span></li>
+      <li><span>Oral presentation</span><span class="pill">Done</span></li>
+      <li><span>Final design review &amp; poster</span><span class="pill dim">Upcoming</span></li>
     </ul>
     <h2>Key feedback</h2>
     <div class="note"><b>"How will you measure durability from a sketch?"</b>We proposed accelerated testing as a proxy, borrowed from industry practice our mentor described.</div>
+    <div class="note" style="margin-top:12px"><b>Add vertical adjustment and a push trigger</b>After v2, Dr. Bisesti's feedback led us to plan an adjustable-height, push-trigger version for campers with limited strength.</div>
     <div class="next"><a href="#prototype">← Prototype</a><span></span></div>
   </div>
 </section>
