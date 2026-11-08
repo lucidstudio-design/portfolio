@@ -127,8 +127,10 @@
       const r = ctaEl.getBoundingClientRect();
       const cx = r.left + r.width / 2;
       const cy = r.top + r.height / 2;
-      const ox = (mx - cx) * 0.25;
-      const oy = (my - cy) * 0.25;
+      // Pull is capped so neighbouring buttons (12-20px apart) can never collide.
+      const cap = 6;
+      const ox = Math.max(-cap, Math.min(cap, (mx - cx) * 0.12));
+      const oy = Math.max(-cap, Math.min(cap, (my - cy) * 0.12));
       magX += (ox - magX) * 0.18;
       magY += (oy - magY) * 0.18;
       ctaEl.style.transform = `translate(${magX}px, ${magY}px)`;

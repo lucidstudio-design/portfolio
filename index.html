@@ -67,7 +67,7 @@ nav.tabs { display: grid; grid-template-columns: 1fr auto 1fr; align-items: cent
 .nav-r { justify-content: flex-end; }
 .emblem { display: inline-flex; color: var(--icy); padding: 6px; margin-right: 10px; transition: color .3s ease, transform .6s cubic-bezier(.22,.8,.36,1); }
 .emblem svg { width: 34px; height: 34px; display: block; }
-.emblem:hover { color: var(--peri); transform: rotate(90deg); }
+.emblem:hover { color: var(--peri); transform: rotate(-90deg); }
 nav.tabs .wordmark { font: 800 clamp(30px, 4.2vw, 50px)/1 var(--head); letter-spacing: .14em; margin-right: -.14em; color: var(--fg); text-decoration: none; padding: 0; transition: color .3s ease; }
 nav.tabs .wordmark:hover { color: var(--icy); }
 nav.tabs .link { position: relative; font: 500 15px/1 var(--sans); text-decoration: none; color: #cfcfcf; padding: 10px 12px; transition: color .3s ease; white-space: nowrap; }
@@ -93,7 +93,7 @@ nav.tabs .link[aria-current="page"]::after { transform: scaleX(1); transform-ori
 @media (min-width: 861px) { .navlinks { display: contents; } }
 @media (max-width: 420px) { nav.tabs .wordmark { font-size: 24px; } nav.tabs .link { font-size: 14px; padding: 10px 8px; } .social { width: 32px; height: 32px; } }
 
-main { padding-block: 72px 96px; }
+main { padding-block: 28px 96px; }
 .page, .stage { display: none; }
 .page.on, .stage.on { display: block; animation: in .4s ease both; }
 @keyframes in { from { transform: translateY(8px); } to { transform: none; } }
@@ -101,7 +101,7 @@ main { padding-block: 72px 96px; }
 
 .eyebrow { font: 500 11.5px/1 var(--mono); text-transform: uppercase; letter-spacing: .16em; color: var(--blue); margin: 0 0 20px; display: flex; align-items: center; gap: 12px; }
 .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--blue); }
-h1 { font: 700 clamp(34px, 5.4vw, 56px)/1.08 var(--head); letter-spacing: -.02em; margin: 0 0 20px; text-wrap: balance; }
+h1 { font: 700 clamp(36px, 5.6vw, 60px)/1.05 var(--sans); letter-spacing: -.035em; margin: 0 0 20px; text-wrap: balance; }
 .grad { background: linear-gradient(135deg, #fff 0%, var(--icy) 45%, var(--peri) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 h2 { font: 600 13px/1 var(--mono); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); margin: 56px 0 18px; }
 p { margin: 0 0 14px; max-width: 58ch; }
@@ -116,16 +116,29 @@ p { margin: 0 0 14px; max-width: 58ch; }
 .arrow { display: inline-block; font-weight: 400; font-size: 1.05em; line-height: 1; transition: transform .4s cubic-bezier(.22,.8,.36,1); transform: rotate(45deg); }
 .btn:hover .arrow, .ghost:hover .arrow { transform: rotate(0deg); }
 /* hero photo */
-.hero-photo { position: relative; margin: 0 0 48px; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 60px rgba(138,132,226,.12); }
-.hero-photo img { display: block; border: 0; border-radius: 0; background: none; width: 100%; height: min(62vh, 620px); object-fit: cover; object-position: 50% 30%; }
-.hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.55)); pointer-events: none; }
-@media (max-width: 720px) { .hero-photo img { height: 46vh; object-position: 45% 30%; } }
-.actions { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin-top: 30px; }
+.hero-photo { position: relative; margin: 0 0 44px; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 60px rgba(138,132,226,.12); }
+.hero-photo img { display: block; border: 0; border-radius: 0; background: none; width: 100%; height: auto; }
+/* UNbound hero carousel (photos from unboundyi.org) */
+.carousel { position: relative; margin: 0 0 44px; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 0 60px rgba(138,132,226,.12); aspect-ratio: 16 / 9; max-width: 100%; background: var(--surface); }
+.carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; border-radius: 0; opacity: 0; transition: opacity .9s ease; }
+.carousel img.on { opacity: 1; }
+.carousel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.6)); pointer-events: none; }
+.car-ui { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.car-cap { font: 500 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--icy); min-width: 0; }
+.car-dots { display: flex; gap: 8px; }
+.car-dots button { width: 8px; height: 8px; border-radius: 99px; border: 0; padding: 0; background: rgba(255,255,255,.4); transition: width .3s ease, background .3s ease; }
+.car-dots button[aria-current="true"] { width: 24px; background: var(--peri); }
+.car-arrows { display: flex; gap: 8px; }
+.car-arrows button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.45); color: var(--fg); font: 400 18px/1 var(--sans); transition: background .35s ease, color .35s ease, border-color .35s ease; }
+.car-arrows button:hover { background: var(--peri); border-color: var(--peri); color: #000; }
+@media (max-width: 560px) { .carousel { aspect-ratio: 4 / 3; } .car-cap { display: none; } }
+.actions { display: flex; flex-wrap: wrap; gap: 16px 22px; align-items: center; margin-top: 30px; }
 
 /* about */
 .hero { display: block; }
 .hero > div { min-width: 0; }
-.hero h1 { font-size: clamp(32px, 4.6vw, 60px); max-width: 20ch; }
+.hero h1 { font-size: clamp(34px, 5vw, 64px); max-width: none; }
+.hero p, #p-unbound > p { max-width: none; }
 .portrait { width: 100%; max-width: 380px; aspect-ratio: 3/4; object-fit: cover; border-radius: 18px; box-shadow: 0 0 0 1px rgba(138,132,226,.3), 0 0 40px rgba(138,132,226,.12), 0 0 90px rgba(121,190,238,.08); }
 @media (max-width: 960px) { .hero { grid-template-columns: minmax(0, 1fr) 280px; gap: 48px; } }
 @media (max-width: 720px) { .hero { grid-template-columns: 1fr; gap: 28px; } .portrait { width: 180px; order: -1; } }
@@ -322,6 +335,19 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 
 <!-- UNBOUND -->
 <section class="page" id="p-unbound">
+  <div class="carousel" id="ub-car" aria-roledescription="carousel" aria-label="UNbound in action">
+    <img class="on" src="img/ub-1.jpg" alt="Miles for Smiles charity race">
+    <img src="img/ub-2.jpg" alt="Classroom workshop in session" loading="lazy">
+    <img src="img/ub-3.jpg" alt="Infant treated by Operation Smile" loading="lazy">
+    <img src="img/ub-4.jpg" alt="Operation Smile surgical team" loading="lazy">
+    <img src="img/ub-5.jpg" alt="Families at an Operation Smile event" loading="lazy">
+    <img src="img/ub-6.jpg" alt="Students writing in class" loading="lazy">
+    <div class="car-ui">
+      <span class="car-cap" id="ub-cap">Miles for Smiles charity race</span>
+      <div class="car-dots" id="ub-dots"></div>
+      <div class="car-arrows"><button type="button" id="ub-prev" aria-label="Previous photo">‹</button><button type="button" id="ub-next" aria-label="Next photo">›</button></div>
+    </div>
+  </div>
   <p class="eyebrow">Founder &amp; Chairman · Est. March 2025</p>
   <h1>Leadership <span class="grad">unbound</span> by borders.</h1>
   <p class="lede">The UNbound Youth Initiative is a global student-led leadership network that connects English-speaking schools around the world to equip students with the tools, guidance, and global lens to lead community-based service initiatives—sparking lasting impact that begins in schools and ripples outward.</p>
@@ -650,6 +676,26 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 })();
 </script>
 <script src="js/cursor.js"></script>
+<script>
+(function () {
+  var car = document.getElementById("ub-car"); if (!car) return;
+  var imgs = car.querySelectorAll("img"), cap = document.getElementById("ub-cap"), dots = document.getElementById("ub-dots"), i = 0, timer;
+  imgs.forEach(function (im, k) {
+    var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-label", "Show photo " + (k + 1));
+    b.addEventListener("click", function () { go(k); restart(); }); dots.appendChild(b);
+  });
+  function go(k) {
+    i = (k + imgs.length) % imgs.length;
+    imgs.forEach(function (im, n) { im.classList.toggle("on", n === i); });
+    dots.querySelectorAll("button").forEach(function (b, n) { b.setAttribute("aria-current", n === i ? "true" : "false"); });
+    cap.textContent = imgs[i].alt;
+  }
+  function restart() { clearInterval(timer); if (!matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(function () { go(i + 1); }, 5000); }
+  document.getElementById("ub-prev").addEventListener("click", function () { go(i - 1); restart(); });
+  document.getElementById("ub-next").addEventListener("click", function () { go(i + 1); restart(); });
+  go(0); restart();
+})();
+</script>
 
 </body>
 </html>
