@@ -231,6 +231,14 @@ figcaption { font: 400 12px/1.5 var(--mono); color: var(--muted); margin-top: 10
 b { font-weight: 600; }
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
 .grid3 > * { min-width: 0; }
+.ph img { aspect-ratio: 3 / 4; object-fit: cover; background: #111; }
+.iter-photos { margin: 20px 0 18px; }
+.iter-photos.grid2 img { aspect-ratio: 4 / 3; object-fit: cover; background: #111; }
+.tbl.test td:nth-child(2) { white-space: normal; font-weight: 400; }
+.tbl.test td:first-child { font-weight: 600; }
+.tbl.test td:nth-child(4) { color: inherit; }
+.res { display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.res span:last-child { color: var(--muted); font-size: 13.5px; }
 @media (max-width: 620px) { .grid3 { grid-template-columns: 1fr; } }
 .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .flow div { background: #000; border: 1px solid var(--line); border-radius: 12px; padding: 12px 10px; min-width: 84px; text-align: center; }
@@ -584,13 +592,18 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
 
   <!-- PROTOTYPE ITERATION -->
   <div class="stage" id="s-prototype">
-    <p class="eyebrow">Stage 04 · Early iterations</p>
+    <p class="eyebrow">Stage 04 · EDP 6–7</p>
     <h1>Prototype Iteration</h1>
-    <p class="lede">Two iterations so far: a cardboard proof of concept, then a CAD and 3D-printed v2.</p>
+    <p class="lede">Three iterations, from a cardboard proof of concept to a to-scale refined prototype, then a test of each design criterion.</p>
 
     <div class="note" style="margin-top:28px"><b>The big pivot</b>Lo-fi testing showed that Idea 12's original support and rotation mechanism didn't work as well as expected. Inspired by a pottery wheel, we redesigned it as a foot-driven rotating base that carries the marker's weight while the camper aims with their feet.</div>
 
     <h2>v1 · Lo-fi foot axis, Y-stand, and mount</h2>
+    <div class="grid3 ph iter-photos">
+      <figure><img src="img/v1-axis.jpg" alt="Cardboard foot axis: a cardboard disk sitting inside a cardboard ring"><figcaption>Foot axis</figcaption></figure>
+      <figure><img src="img/v1-ystand.jpg" alt="Lo-fi Y-stand made from a labeled craft stick, two straws, tape, and clothespin feet"><figcaption>Y-stand</figcaption></figure>
+      <figure><img src="img/v1-mount.jpg" alt="Orange toy blaster used to check the mount shape"><figcaption>Mount fit check</figcaption></figure>
+    </div>
     <dl class="iter">
       <div><dt>Built from</dt><dd>Cardboard, straws, string, hot glue, tape, small bearings, and dowel rods, at a small scale. Each subsystem was built separately.</dd></div>
       <div><dt>Purpose</dt><dd>Check the idea and geometry cheaply before CAD. Can the Y-stand hold the marker steady? Can a bearing turn a moving stand on top of a fixed one? Can the mount fit the marker?</dd></div>
@@ -600,6 +613,11 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
     </dl>
 
     <h2>v2 · CAD mount, trigger, interface, stand, and axis</h2>
+    <div class="grid3 ph iter-photos">
+      <figure><img src="img/v2-assembly.jpg" alt="Scaled 3D-printed marker model held by a wooden Y-stand on a two-tier 3D-printed rotating base"><figcaption>Assembly with scaled marker</figcaption></figure>
+      <figure><img src="img/v2-base.jpg" alt="3D-printed base plate with a central press-fit bearing hub"><figcaption>Base plate and bearing hub</figcaption></figure>
+      <figure><img src="img/v2-plate.jpg" alt="3D-printed rotating plate with slots for the stand"><figcaption>Rotating plate with stand slots</figcaption></figure>
+    </div>
     <dl class="iter">
       <div><dt>Purpose</dt><dd>Improve durability and precision, much closer to the device's real function.</dd></div>
       <div><dt>Results</dt><dd>The axis turns smoothly through 360°. The stand supports the proportional weight of a 3D-printed model marker, and the mount fits snugly around it.</dd></div>
@@ -618,7 +636,66 @@ footer a { text-decoration: none; } footer a:hover { color: var(--blue); }
         <tr><td>System integration</td><td>Assemble everything, test rotation and stability, revise CAD</td><td>Team</td><td class="num">6–8 hr</td></tr>
       </tbody>
     </table></div>
-    <div class="todo">Prototype photos for v1 and v2 will be added here.</div>
+
+    <h2>v3 · CAD mount, trigger, stand, and axis</h2>
+    <div class="grid2 iter-photos">
+      <figure><img src="img/v3-mount.jpg" alt="Tippmann 98 Custom marker held by three 3D-printed mounts bolted to a wooden board"><figcaption>Mount on the marker</figcaption></figure>
+      <figure><img src="img/v3-stand.jpg" alt="Wooden post rising from a two-layer plywood foot axis"><figcaption>Stand and foot axis</figcaption></figure>
+    </div>
+    <dl class="iter">
+      <div><dt>Purpose</dt><dd>Match how the final product works. The materials aren't final, but the design nearly is. What remains is improving the joints.</dd></div>
+      <div><dt>Results</dt><dd>Campers can turn the whole attachment smoothly and quickly with their feet. Rotation stops at 120° so users can't aim at themselves. The device is sturdy and stable, and it fits snugly around the marker.</dd></div>
+      <div><dt>Lessons</dt><dd>The materials still aren't durable enough, the elephant method isn't integrated yet, and the slots need adjusting to fit the marker better.</dd></div>
+      <div><dt>Next</dt><dd>Build a high-fidelity device with a working elephant method, better materials, and pitch adjustment.</dd></div>
+    </dl>
+
+    <h2>EDP 6c · Refined prototype</h2>
+    <figure>
+      <img src="img/final-sketch.jpg" alt="Final design sketch: mounts on a platform, a stand, and a two-layer foot axis. Callouts show the elephant method to be made, the upper and lower muzzle lock components, and a stop limiting rotation to 120 degrees">
+      <figcaption>Final design. The upper lock slots around the lower lock outside the muzzle, and a stop limits the foot axis to 120°. The elephant method is the next part to build.</figcaption>
+    </figure>
+    <div class="grid2 iter-photos">
+      <figure><img src="img/v3-mount.jpg" alt="Refined prototype mounted on the Tippmann marker"><figcaption>1 · Mount on the marker</figcaption></figure>
+      <figure><img src="img/v3-stand.jpg" alt="Refined stand and foot axis"><figcaption>2 · Stand and foot axis</figcaption></figure>
+      <figure><img src="img/final-front.jpg" alt="Front mount closed around the barrel with a rotating latch"><figcaption>3 · Front attachment mechanism</figcaption></figure>
+      <figure><img src="img/final-back.jpg" alt="Back mount holding the marker's rear, bolted to the board"><figcaption>4 · Back attachment mechanism</figcaption></figure>
+      <figure><img src="img/final-mid.jpg" alt="Middle mount gripping both sides of the marker body below the rail"><figcaption>5 · Middle attachment mechanism</figcaption></figure>
+      <figure><img src="img/final-stop.jpg" alt="Wooden stop screwed to the edge of the rotating plywood disk"><figcaption>6 · Stop that prevents more than 120° of rotation</figcaption></figure>
+    </div>
+    <div class="actions" style="margin:4px 0 8px"><a class="ghost" data-cursor="cta" href="https://drive.google.com/file/d/1q5ITa9UG9zbCmC9W_g7QMxzblco3Ozfd/view" target="_blank" rel="noopener">Watch the demo video <span class="arrow">↗</span></a></div>
+    <dl class="iter" style="margin-top:20px">
+      <div><dt>Achieved</dt><dd>A to-scale version of our solution: a foot axis campers can really turn with their feet, a stand that mounts onto the marker, and materials that generally support the device's weight.</dd></div>
+    </dl>
+
+    <h2>EDP 7 · Test plan</h2>
+    <div class="tbl test"><table>
+      <thead><tr><th>Criterion &amp; target</th><th>How we measure it</th><th>Test type</th><th>Repeats</th><th>Who</th></tr></thead>
+      <tbody>
+        <tr><td>Stable · ≥ 100 N on the full device</td><td>Apply 100 N for 5 minutes, then check for tipping, slipping, cracks, or permanent deflection.</td><td>Standard · direct</td><td class="num">3</td><td>Our team</td></tr>
+        <tr><td>Sturdy · &gt; 10 N on the trigger</td><td>Apply 10 N to the trigger interface for 1 minute, checking for breaks or permanent deformation.</td><td>Standard · direct</td><td class="num">5</td><td>Our team</td></tr>
+        <tr><td>Abides by NXL guidelines</td><td>Check each applicable NXL guideline against a checklist.</td><td>Standard · direct</td><td class="num">1</td><td>Our team, confirmed by Malia White</td></tr>
+        <tr><td>Easy to use · average UDS ≥ 3.5</td><td>Each participant tries to stabilize the marker while an observer rates them on our UDS.</td><td>Constructed · surrogate</td><td class="num">5 people × 3 shots</td><td>Our team and/or camp staff</td></tr>
+        <tr><td>Enduring · ≥ 10,400 uses</td><td>Cycle the trigger interface 1,000 times, about 10% of full life, to reveal early wear.</td><td>Standard · surrogate</td><td class="num">1 × 1,000</td><td>Our team</td></tr>
+        <tr><td>Economical · ≤ $40 per assembly</td><td>Total the bill of materials (filament grams × $/g, fasteners, hardware) from receipts and OEDK prices.</td><td>Standard · direct</td><td class="num">1 per prototype</td><td>Our team</td></tr>
+        <tr><td>Easy to maintain · &lt; 20 s to disassemble</td><td>Time a full disassembly from the marker with a stopwatch.</td><td>Standard · direct</td><td class="num">5 × 3 members</td><td>Our team</td></tr>
+      </tbody>
+    </table></div>
+    <p>The most critical tests are stability, sturdiness, and ease of use. Our design analysis showed stability as one of the main issues, and ease of use is the product's main goal. If the Y-stand, axis, and mount can't hold their loads, or the trigger breaks under 10 N, nothing else matters, because these are constraints. NXL guidelines are just as important but easier to check. Intermediate prototypes show us which characteristics to prioritize: earlier EDP decisions set the order of design priorities, and prototypes show how to act on it.</p>
+
+    <h2>EDP 7 · Results</h2>
+    <div class="tbl test"><table>
+      <thead><tr><th>Criterion</th><th>Target</th><th>Why it matters</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Stable</td><td class="num">≥ 100 N</td><td>Accounts for the marker's weight plus force from the user. Without it, the device can't hold the marker.</td><td><div class="res"><span class="pill">Works</span><span>Met. We'll refine materials and structure to improve it further.</span></div></td></tr>
+        <tr><td>Economical</td><td class="num">≤ $40</td><td>Keeps the cost realistic if Camp For All wants more units in the future.</td><td><div class="res"><span class="pill">Works</span><span>Under $40.</span></div></td></tr>
+        <tr><td>Easy to maintain</td><td class="num">&lt; 20 s</td><td>Detaching quickly matters to staff, but isn't needed for function.</td><td><div class="res"><span class="pill">Works</span><span>Very fast, under 5 s.</span></div></td></tr>
+        <tr><td>Easy to use</td><td class="num">UDS ≥ 3.5</td><td>Campers should need minor staff setup at most, and maybe a little help.</td><td><div class="res"><span class="pill dim">Needs improvement</span><span>5 for the axis. 1 for the actuator, which isn't built yet.</span></div></td></tr>
+        <tr><td>Abides by NXL</td><td class="num">All applicable</td><td>Safety is always the first priority. Failing NXL guidelines means failing outright.</td><td><div class="res"><span class="pill dim">Needs improvement</span><span>Can't be fully checked until the elephant method is final.</span></div></td></tr>
+        <tr><td>Sturdy</td><td class="num">≥ 10 N</td><td>Slightly more than the force to pull the trigger. Below it, the device breaks.</td><td><div class="res"><span class="pill dim">Needs improvement</span><span>Not yet testable.</span></div></td></tr>
+        <tr><td>Enduring</td><td class="num">≥ 10,400 uses</td><td>The device could survive fewer uses and still work.</td><td><div class="res"><span class="pill dim">Needs improvement</span><span>Not yet testable.</span></div></td></tr>
+      </tbody>
+    </table></div>
+    <div class="note" style="margin-top:20px"><b>What's next</b>We need to build the full elephant method before we can test NXL compliance, sturdiness, ease of use, and endurance. We built the base first because the elephant method depends on its dimensions and structure. With a mid-fi axis, stand, and mount done, the elephant method is now much easier to build.</div>
     <div class="next"><a href="#solution">← Solution</a><a href="#communication">Communication →</a></div>
   </div>
 
